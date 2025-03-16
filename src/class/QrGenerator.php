@@ -45,4 +45,8 @@ class QrGenerator
         return self::LENGTH_BITS[$modeIndex][$bitsIndex];
     }
 
+    public function getByteData(){
+        #TODO implement this function
+    }
+
 }
