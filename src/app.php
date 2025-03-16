@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__ . '/class/CodeGenerator.php';
+require_once __DIR__ . '/class/QrGenerator.php';
 
 #Simple PHP script to output codeGenerator results
 
-$codeGenerator = new CodeGenerator();
+$codeGenerator = new QrGenerator();
 
-echo $codeGenerator->generate() . "\n";
+echo $codeGenerator->generate("https://www.qrcode.com/") . "\n";
