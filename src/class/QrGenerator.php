@@ -6,9 +6,20 @@ class QrGenerator
     private const ALPHANUMERIC_RE = '/^[\dA-Z $%*+\-.\/:]*$/';
     private const LATIN1_RE = '/^[\x{00}-\x{FF}]*$/u';
 
+    //Versions: 1-9, 10-26, 27-40
+    private const LENGTH_BITS = [
+        [10, 12, 14], //numeric
+        [9, 11, 13], //alphanumeric
+        [8, 16, 16], //bytes (latin - 1)
+    ];
+
+
     public function generate(string $subject): mixed
     {
-        return $this->getEncodingMode($subject);
+        $encodingMode = $this->getEncodingMode($subject);
+        $version = 2;
+        
+        return $this->getLengthBits($encodingMode, $version);
     }
 
     public function getEncodingMode(string $subject): int
@@ -24,5 +35,14 @@ class QrGenerator
         }
         return 0b0111;
     }
-}
 
+    public function getLengthBits(int $mode, int $version)
+    {
+        $modeIndex = (int) floor(log($mode, 2));
+
+        $bitsIndex = $version > 26 ? 2 : ($version > 9 ? 1 : 0);
+
+        return self::LENGTH_BITS[$modeIndex][$bitsIndex];
+    }
+
+}
