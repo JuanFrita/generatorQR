@@ -38,7 +38,17 @@ final class QRCodeSettings
     ];
 
     // =============================================
-    // 4. Capacity config table
+    // 5. Reserved bits for content length
+    // =============================================
+    #Versions: 1-9, 10-26, 27-40
+    public const LENGTH_BITS = [
+        [10, 12, 14], //numeric
+        [9, 11, 13], //alphanumeric
+        [8, 16, 16], //bytes (latin - 1)
+    ];
+
+    // =============================================
+    // 6. Capacity config table
     // Columns 2-4 represents the maximun content length for the encoding
     // =============================================
     public const VERSION_TABLE = [
@@ -243,15 +253,5 @@ final class QRCodeSettings
         ["M",                       5596,       3391,           2331,       1435,       40],
         ["Q",                       3993,       2420,           1663,       1024,       40],
         ["H",                       3057,       1852,           1273,       784,        40]
-    ];
-
-    // =============================================
-    // 5. Reserved bits for content length
-    // =============================================
-    #Versions: 1-9, 10-26, 27-40
-    public const LENGTH_BITS = [
-        [10, 12, 14], //numeric
-        [9, 11, 13], //alphanumeric
-        [8, 16, 16], //bytes (latin - 1)
     ];
 }
