@@ -13,12 +13,11 @@ class QrGenerator
         [8, 16, 16], //bytes (latin - 1)
     ];
 
-
     public function generate(string $subject): mixed
     {
         $encodingMode = $this->getEncodingMode($subject);
         $version = 2;
-        
+
         return $this->getLengthBits($encodingMode, $version);
     }
 
@@ -36,16 +35,23 @@ class QrGenerator
         return 0b0111;
     }
 
-    public function getLengthBits(int $mode, int $version)
+    public function getLengthBits(int $mode, int $version): int
     {
         $modeIndex = (int) floor(log($mode, 2));
 
-        $bitsIndex = $version > 26 ? 2 : ($version > 9 ? 1 : 0);
+        if ($version > 26) {
+            $bitsIndex = 2;
+        } elseif ($version > 9) {
+            $bitsIndex = 1;
+        } else {
+            $bitsIndex = 0;
+        }
 
         return self::LENGTH_BITS[$modeIndex][$bitsIndex];
     }
 
-    public function getByteData(){
+    public function getByteData()
+    {
         #TODO implement this function
     }
 
