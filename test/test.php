@@ -25,7 +25,7 @@ try {
     }
 
 } catch (\Throwable $th) {
-    log_error($th->getMessage());
+    logError($th->getMessage());
 }
 
 function testClass(string $class)
@@ -51,14 +51,14 @@ function testClass(string $class)
             $obj->$test();
         } catch (Throwable $e) {
             $failed = true;
-            log_error("Test::$index $test failed: " . $e->getMessage() . "\n");
+            logError("Test::$index $test failed: " . $e->getMessage() . "\n");
             continue;
         }
     }
 
     if ($failed) {
-        log_error("Some tests failed for $class.\n");
+        logError("Some tests failed for $class.\n");
     } else {
-        log_info("All tests passed for $class.\n");
+        logInfo("All tests passed for $class.\n");
     }
 }
