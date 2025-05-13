@@ -1,6 +1,6 @@
 <?php
 
-namespace Juanfrita\QrGenerator\Class;
+namespace Juanfrita\QrGenerator\Core;
 
 class Logger
 {

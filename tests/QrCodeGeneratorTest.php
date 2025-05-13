@@ -2,7 +2,7 @@
 
 namespace Juanfrita\QrGenerator\Tests;
 
-use Juanfrita\QrGenerator\Class\QrCodeGenerator;
+use Juanfrita\QrGenerator\Core\QrCodeGenerator;
 
 class QrCodeGeneratorTest
 {

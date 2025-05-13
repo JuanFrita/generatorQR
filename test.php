@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-use Juanfrita\QrGenerator\Class\Logger;
+use Juanfrita\QrGenerator\Core\Logger;
 
 $class = $argv[1] ?? null;
 
