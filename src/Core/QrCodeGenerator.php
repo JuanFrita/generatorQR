@@ -13,6 +13,7 @@ class QrCodeGenerator
      * Generates a QR code for a subject.
      * Auto-calculates version.
      * @param string $subject QR content
+     * @throws \Exception
      */
     public function generate(string $subject): mixed
     {
