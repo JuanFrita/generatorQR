@@ -6,21 +6,21 @@ class QrCodeGeneratorTest
 {
     #TESTS ENCODING
 
-    public function test_encode_number()
+    public function testEncodeNumber()
     {
         $qrgenerator = new QrGenerator();
         $encodeMode = $qrgenerator->getEncodingMode(1);
         assert($encodeMode === 1, "Encode mode must be 1 for digits");
     }
 
-    public function test_encode_alphaNumeric()
+    public function testEncodeAlphaNumeric()
     {
         $qrgenerator = new QrGenerator();
         $encodeMode = $qrgenerator->getEncodingMode("ABC123ZXY");
         assert($encodeMode === 2, "Encode mode must be 2 for alpha numeric");
     }
 
-    public function test_encode_latin1()
+    public function testEncodeLatin1()
     {
         $qrgenerator = new QrGenerator();
         $encodeMode = $qrgenerator->getEncodingMode("Café con leche - Málaga © 2024");
@@ -29,7 +29,7 @@ class QrCodeGeneratorTest
 
     #TEST LENGTH BITS
 
-    public function test_get_length_bits()
+    public function testGetLengthBits()
     {
         $qrGenerator = new QrGenerator();
         $lengthBits = $qrGenerator->getLengthBits(4, 2);

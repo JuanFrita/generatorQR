@@ -21,14 +21,14 @@ try {
     }
 
     foreach ($testClasses as $testClass) {
-        test_class($testClass);
+        testClass($testClass);
     }
 
 } catch (\Throwable $th) {
     log_error($th->getMessage());
 }
 
-function test_class(string $class)
+function testClass(string $class)
 {
     echo  "\nTesting class $class \n\n";
 
@@ -37,7 +37,7 @@ function test_class(string $class)
     $funcs = get_class_methods($obj);
 
     $tests = array_filter($funcs, function ($func) {
-        return str_starts_with($func, "test_");
+        return str_starts_with($func, "test");
     });
 
     if ($tests === []) {

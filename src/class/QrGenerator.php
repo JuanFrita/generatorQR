@@ -13,14 +13,26 @@ class QrGenerator
         [8, 16, 16], //bytes (latin - 1)
     ];
 
+    /**
+     * Generates a QR code for a subject.
+     * Auto-calculates version.
+     * @param string $subject QR content
+     */
     public function generate(string $subject): mixed
     {
         $encodingMode = $this->getEncodingMode($subject);
-        $version = 2;
 
-        return $this->getLengthBits($encodingMode, $version);
+        return $this->getLengthBits($encodingMode, 2);
     }
 
+    /**
+     * Gets the encoding mode for the given subject:
+     * - NUMERIC: 1
+     * - ALPHANUMERIC: 2
+     * - OTHER: 3
+     * - LATIN1: 4
+     * @param string $subject QR content
+     */
     public function getEncodingMode(string $subject): int
     {
         if (preg_match(self::NUMERIC_RE, $subject)) {
@@ -35,6 +47,23 @@ class QrGenerator
         return 0b0111;
     }
 
+    /**
+     * Gets the QR version. Based on the lenght of the content and encoding mode
+     * @param int $length content's length
+     * @param int $mode encoding
+     */
+    public function getVersion(int $length, int $mode): int{
+        #TODO finsih implementation and configuration of getVersion function
+        return $length - $mode;
+    }
+
+    /**
+     * Gets the number of bits needed to represent content's length. It's Based on encoding mode
+     * and version
+     * @param int $mode encoding
+     * @param int $version QR version
+     * @return int
+     */
     public function getLengthBits(int $mode, int $version): int
     {
         $modeIndex = (int) floor(log($mode, 2));
@@ -52,7 +81,7 @@ class QrGenerator
 
     public function getByteData()
     {
-        #TODO implement this function
+        #TODO implement getByteData function
     }
 
 }
