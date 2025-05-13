@@ -16,11 +16,11 @@ class QrCodeGenerator
      */
     public function generate(string $subject): mixed
     {
-        $encodingMode = $this->getEncodingMode($subject);
+        $encodingMode = $this->calculateEncodingMode($subject);
 
-        $version = $this->getOptimalVersion(strlen($subject), $encodingMode);
+        $version = $this->calculateOptimalVersion(strlen($subject), $encodingMode);
 
-        return $this->getLengthBits($encodingMode, $version);
+        return $this->calculateLengthBits($encodingMode, $version);
     }
 
     /**
@@ -31,7 +31,7 @@ class QrCodeGenerator
      * - LATIN1: 4
      * @param string $subject QR content
      */
-    public function getEncodingMode(string $subject): int
+    public function calculateEncodingMode(string $subject): int
     {
         if (preg_match(QRCodeSettings::NUMERIC_RE, $subject)) {
             return QrCodeSettings::NUMERIC;
@@ -51,7 +51,7 @@ class QrCodeGenerator
      * @param int $length content's length
      * @param int $mode encoding
      */
-    public function getOptimalVersion(int $length, int $mode): int{
+    public function calculateOptimalVersion(int $length, int $mode): int{
         $encodingIndex = QrCodeSettings::VERSION_INDEX[$mode] ?? throw new BadEncodingOptionException();
 
         $maxLength = QrCodeSettings::MAX_CONTENT_LENGTH[$mode];
@@ -81,7 +81,7 @@ class QrCodeGenerator
      * @param int $version QR version
      * @return int
      */
-    public function getLengthBits(int $mode, int $version): int
+    public function calculateLengthBits(int $mode, int $version): int
     {
         $modeIndex = (int) floor(log($mode, 2));
 
